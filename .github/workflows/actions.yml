@@ -1,11 +1,25 @@
 name: Actions Workflow
 
 on:
+  push:
+    branches:
+      - master
+      - 'feature/*' #matches feature/something_else
+      - 'feature/**' #matches feature/smth_else/smth_else
+      - '!feature/featC' #exclude this pattern with exclamation
+    tags:
+      - v1.*
+    path:
+      - '**.js' #triggers only for JS files pushed
+    # path-ignore:
+    #   - 'docs/**' # wont work if push something in folder docs
+  # reprository_dispatch:
+  #   types: [build]
   # push:
   # schedule:
   # - cron: '0/1 * * * *'
-  pull_request:
-    types: [closed, assigned, opened, reopened]
+  # pull_request:
+  #   types: [closed, assigned, opened, reopened]
 
 jobs:
   run-github-actions:
